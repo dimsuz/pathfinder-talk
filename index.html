@@ -25,15 +25,51 @@
                   </p>
                 </section>
                 <section>
-                  <h3>Алгебраические? Типы?</h3>
-                  <p class="fragment">Звучит загадочно</p>
-                  <p class="fragment">Используется ежедневно</p>
-                  <p class="fragment">Поддерживается всеми современными языками</p>
+                  <h3>Анатомия URL (в проекте)</h3>
+                  <p class="fragment hljs-number">https://api.project.ru/v1/{categoryId}/users?sort=name</p>
                 </section>
                 <section>
-                  <section>
-                    <h3>Примеры ( <img src="images/kotlin-logo.svg" height="50px" style="margin-bottom: -8px; margin-top: 0;"> )</h3>
-                  </section>
+                  <p>https://api.project.ru/v1/<span style="opacity: 0.2;">{categoryId}/users?sort=name</span></p>
+                  <p class="fragment hljs-number">baseUrl</p>
+                  <p class="fragment fade-in-then-semi-out">ServerConfig(baseUrl = "https://api.project.ru/v1/")</p>
+                  <p class="fragment fade-in-then-semi-out">Складывается в репозиторий/persistance на старте</p>
+                  <p class="fragment fade-in-then-semi-out">Скармливается Retrofit при его инициализации</p>
+                  <p class="fragment">Меняется через дебаг панель</p>
+                </section>
+                <section data-transition="slide-in fade-out">
+                  <p><span style="opacity: 0.2;">https://api.project.ru/v1/</span>{categoryId}<span style="opacity: 0.2;">/users?sort=name</span></p>
+                  <p class="fragment hljs-number">Path-параметр</p>
+                  <p class="fragment fade-in-then-semi-out">Задаётся через Retrofit <span class="hljs-number">@Path</span></p>
+                  <p class="fragment fade-in-then-semi-out">Конфигурируется в <span class="hljs-number">ProjectApi.kt</span>-файлах</p>
+                  <p class="fragment fade-in-then-semi-out">Фактическое значение передаётся из Repository</p>
+                  <p class="fragment"><s>Меняется через дебаг панель</s></p>
+                </section>
+                <section data-transition="fade-in slide-out">
+                  <p><span style="opacity: 0.2;">https://api.project.ru/v1/{categoryId}/users</span>?sort=name</p>
+                  <p class="fragment hljs-number">Query-параметр</p>
+                  <p class="fragment fade-in-then-semi-out">Задаётся через Retrofit <span class="hljs-number">@Query</span></p>
+                  <p class="fragment fade-in-then-semi-out">Конфигурируется в <span class="hljs-number">ProjectApi.kt</span>-файлах</p>
+                  <p class="fragment fade-in-then-semi-out">Фактическое значение передаётся из Repository</p>
+                  <p class="fragment"><s>Меняется через дебаг панель</s></p>
+                </section>
+                <section data-transition="slide-in fade-out">
+                  <img src="images/spotlight.jpg">
+                </section>
+                <section data-transition="fade-in slide-out">
+                  <div style="position: relative; text-align: center">
+                    <img src="images/spotlight.jpg">
+                    <h3 style="position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 16px;">Pathfinder</h3>
+                  </div>
+                </section>
+                <section>
+                  <h3>Pathfinder</h3>
+                  <p>Библиотека для конфигурации URL-ов</p>
+                  <p class="fragment"><strong>Только</strong> URL</p>
+                  <p class="fragment">&#128683; Headers</p>
+                  <p class="fragment">&#128683; POST Body</p>
+                  <p class="fragment">&#9989; URL</p>
+                </section>
+                <section>
                   <section>
                     <pre>
                       <code data-trim data-noescape class="kotlin">
@@ -306,6 +342,7 @@
             // - https://revealjs.com/config/
             Reveal.initialize({
                 hash: true,
+                width: 1024,
 
                 // Learn about plugins: https://revealjs.com/plugins/
                 plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
