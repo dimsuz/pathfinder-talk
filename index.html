@@ -67,7 +67,68 @@
                   <p class="fragment"><strong>Только</strong> URL</p>
                   <p class="fragment">&#128683; Headers</p>
                   <p class="fragment">&#128683; POST Body</p>
+                  <p class="fragment">&#128683; Ktor, OkHttpClient, Retrofit</p>
                   <p class="fragment">&#9989; URL</p>
+                </section>
+                <section>
+                  <h3>API</h3>
+                  <pre>
+                    <code data-trim data-noescape class="kotlin">
+                      // in Application.kt
+                      val pathFinder = PathFinder(
+                        environments = listOf(server1, server2),
+                        urls = listOf(
+                          UrlSpec(id = uuid1, "/{categoryId}/users"),
+                          UrlSpec(id = uuid2, "/list/{userId}")
+                        )
+                      )
+                    </code>
+                  </pre>
+                </section>
+                <section>
+                  <h3>API</h3>
+                  <pre>
+                    <code data-trim data-noescape class="kotlin">
+                      // in Repository.kt
+                      val url: String = pathFinder.buildUrl(
+                        urlSpec1.id,
+                        mapOf("categoryId" to "485")
+                      )
+
+                      // url = "https://mock.product.ru/api/v1/485/users"
+                    </code>
+                  </pre>
+                </section>
+                <section>
+                  <h3>API</h3>
+                  <pre>
+                    <code data-trim data-noescape class="kotlin">
+                      interface NetworkApi {
+                        // Было
+                        @GET("{categoryId}/users")
+                        suspend fun fetchUsers(@Path categoryId: String): Users
+
+                        // Стало
+                        @GET
+                        suspend fun fetchUsers(@Url url: String): Users
+                      }
+                    </code>
+                  </pre>
+                </section>
+                <section>
+                  <h3>API</h3>
+                  <pre>
+                    <code data-trim data-noescape class="kotlin">
+                      interface NetworkApi {
+                        @POST
+                        @Header("Authorization: Bearer grizly")
+                        suspend fun updateUser(
+                          @Url url: String,
+                          @Body requestBody: UpdateRequest
+                        )
+                      }
+                    </code>
+                  </pre>
                 </section>
                 <section>
                   <section>
