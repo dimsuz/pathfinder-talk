@@ -134,273 +134,65 @@
                   <h3>PathFinder UI</h3>
                   <p class="fragment">Управление текущим сервером (baseUrl)</p>
                   <p class="fragment">Список всех запросов в приложении</p>
-                  <p class="fragment">Override Path и Query аргументов любого запроса</p>
+                  <p class="fragment hljs-title">Override Path и Query аргументов любого запроса</p>
                   <p class="fragment">Полезна для QA и DEV</p>
                 </section>
                 <section>
-                  <video controls height="600">
+                  <video controls height="650">
                     <source src="video/change-env-1.webm">
                   </video>
                 </section>
                 <section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        sealed class ContentState {
-                            object None : ContentState()
-                            object Loading : ContentState()
-                            object Ready : ContentState()
-                            data class Error(error: Throwable) : ContentState()
-                        }
-                      </code>
-                    </pre>
-                    <div class="r-stack">
-                      <p class="fragment fade-in-then-out">
-                        Algebraic?<br>
-                        <img src="images/finn_thinking1.webp" height="200">
-                      </p>
-                      <p class="fragment current-visible">
-                        Yussss!<br>
-                        <img src="images/finn_yuss1.jpg" height="200">
-                      </p>
-                    </div>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        data class AccountApplicationSM(
-                          val userId: String,
-                          val id: String,
-                          val amount: Money?,
-                          val status: ProductStatus.AccountApplicationStatus,
-                          val number: String
-                        )
-                      </code>
-                    </pre>
-                    <div class="r-stack">
-                      <p class="fragment fade-in-then-out">
-                        Algebraic?<br>
-                        <img src="images/finn_thinking2.jpg" height="200">
-                      </p>
-                      <p class="fragment current-visible">
-                        Yussss!<br>
-                        <img src="images/finn_yuss2.webp" height="200">
-                      </p>
-                    </div>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin" style="font-size: 0.7em; line-height: 1.5em;">
-                        class BottomSheetSearchSelectorDialog {
-                          private var epoxyController: BottomSheetSearchSelectorEpoxyController? = null
-                          private var dialog: BottomSheetDialog? = null
-
-                          fun show() { dialog?.show() }
-
-                          fun dismiss() {
-                            hideKeyboard(dialog?.window?.decorView)
-                            dialog?.dismiss()
-                          }
-                        }
-                      </code>
-                    </pre>
-                    <div class="r-stack">
-                      <p class="fragment fade-in-then-out">
-                        Algebraic?<br>
-                        <img src="images/finn_thinking3.png" height="200">
-                      </p>
-                      <p class="fragment current-visible">
-                        Эммммм...<br>
-                        <img src="images/finn_kinda.webp" height="200">
-                      </p>
-                    </div>
-                  </section>
+                  <video controls height="650">
+                    <source src="video/change-path-vars-1.webm">
+                  </video>
                 </section>
                 <section>
-                  <h3>Причём здесь алгебра?</h3>
-                  <p class="fragment">Похожие операции</p>
-                  <p class="fragment">Мат. нотация используется в теории типов (создание ЯП) для их записи</p>
+                  <p>Query-параметры для Environment</p>
+                    <pre>
+                      <code data-trim data-noescape class="kotlin" style="font-size: 0.65em; line-height: 1.5em;">
+                          Configuration(
+                            environments = listOf(
+                              Environment(
+                                id = EnvironmentId("mock"),
+                                name = "Mock",
+                                baseUrl = "https://mock.project.ru/v1",
+                                queryParameters = setOf("__example", "__code"),
+                              ),
+                              Environment(
+                                id = EnvironmentId("prod"),
+                                name = "Production",
+                                baseUrl = "https://api.project.ru/v1",
+                                queryParameters = null,
+                              ),
+                            ),
+                            defaultEnvironmentId = EnvironmentId("mock"),
+                          )
+                      </code>
+                    </pre>
                 </section>
                 <section>
-                  <h3>Игра</h3>
+                  <video controls height="650">
+                    <source src="video/change-query-vars-1.webm">
+                  </video>
                 </section>
                 <section>
-                  <section>
-                    <h5>
-                      <span class="hljs-title">«Сколько можно создать уникальных значений этого типа?»</span>
-                    </h5>
-                    <table>
-                      <tr>
-                        <td><span class="fragment">Nothing</span></td>
-                        <td><span class="fragment hljs-number">0</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="fragment">Unit</span></td>
-                        <td><span class="fragment hljs-number">1</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="fragment">Boolean</span></td>
-                        <td><span class="fragment hljs-number">2</span></td>
-                      </tr>
-                    </table>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        sealed class Boolean {
-                          object True : Boolean()
-                          object False : Boolean()
-                        }
-                      </code>
-                    </pre>
-                  </section>
-                  <section>
-                    <h5>
-                      <span class="hljs-title">«Сколько можно создать уникальных значений этого типа?»</span>
-                    </h5>
-                    <table>
-                      <tr>
-                        <td><span class="">Nothing</span></td>
-                        <td><span class="hljs-number">0</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="">Unit</span></td>
-                        <td><span class="hljs-number">1</span></td>
-                      </tr>
-                      <tr>
-                        <td><span class="">Boolean</span></td>
-                        <td><span class="hljs-number">1 + 1</span></td>
-                      </tr>
-                    </table>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        sealed class Answer {
-                          object Yes : Answer()
-                          object No : Answer()
-                          object NotSure : Answer()
-                        }
-                      </code>
-                    </pre>
-                    <p class="fragment hljs-number">1 + 1 + 1 = 3</p>
-                    <p class="fragment">и так далее (<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>)...</p>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        sealed class Optional&lt;A&gt; {
-                          object None : Optional&lt;Nothing&gt;()
-                          data class Some&lt;A&gt;(value: A)  : Optional&lt;A&gt;()
-                        }
-                      </code>
-                    </pre>
-                    <p>
-                      <span class="fragment hljs-number">1</span>
-                      <span class="fragment hljs-number"> + A</span>
-                    </p>
-                    <p class="fragment">«+» читается как «или»</p>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        sealed class Either&lt;A, B&gt; {
-                          data class Left&lt;A&gt;(value: A) : Either&lt;A, Nothing&gt;()
-                          data class Right&lt;B&gt;(value: B) : Either&lt;Nothing, B&gt;()
-                        }
-                      </code>
-                    </pre>
-                    <p>
-                      <span class="fragment hljs-number">A</span>
-                      <span class="fragment hljs-number"> + B</span>
-                    </p>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        data class Pair&lt;A, B&gt;(
-                          val first: A,
-                          val second: B
-                        )
-                      </code>
-                    </pre>
-                    <p class="fragment">Если A=Answer, B=Boolean</p>
-                    <p class="fragment hljs-title">(Yes, True) (Yes, False)</p>
-                    <p class="fragment hljs-title">(No, True) (No, False)</p>
-                    <p class="fragment hljs-title">(NotSure, True) (NotSure, False)</p>
-                    <p>
-                      <span class="fragment hljs-number">3 × 2 = 6</span>
-                      <span class="fragment hljs-number">⇒ A × B</span>
-                    </p>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        data class Triple&lt;A, B, C, D&gt;(
-                          val first: A,
-                          val second: B,
-                          val third: Either&lt;C, D&gt;
-                        )
-                      </code>
-                    </pre>
-                    <p>
-                      <span class="fragment hljs-number">A</span>
-                      <span class="fragment hljs-number"> × B</span>
-                      <span class="fragment hljs-number"> × (C + D)</span>
-                    </p>
-                    <p class="hljs-template-tag" style="font-size: 0.7em;">
-                      <span class="fragment">(что будет если раскрыть скобки?...)</span>
-                    </p>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        sealed class Either&lt;A, B, C, D&gt; {
-                          data class Left(value: Pair&lt;A, B&gt;) : Either&lt;...&gt;()
-                          data class Right(value: Pair&lt;C, D&gt;) : Either&lt;...&gt;()
-                        }
-                      </code>
-                    </pre>
-                    <p>
-                      <span class="fragment hljs-number">(A × B) + (C × D)</span>
-                    </p>
-                  </section>
-                  <section>
-                    <pre>
-                      <code data-trim data-noescape class="kotlin">
-                        fun callMe(a: A): B
-                        // или
-                        val callMe: (A) -> B
-                      </code>
-                    </pre>
-                    <p>
-                      <span class="fragment hljs-number">B<sup>A</sup></span>
-                    </p>
-                  </section>
-                </section>
-                <section>
-                  <h3>«Зачем <span class="hljs-number">мне</span> это знать?»</h3>
-                  <img src="images/whatever.jpg" height="300">
-                </section>
-                <section>
-                  <img src="images/shrug.svg" height="300">
-                </section>
-                <section>
-                  <ul>
-                    <li>Интересно (теория + фундамент)</li>
-                    <li class="fragment">Терминология: «sum types», «product types», «union types»</li>
-                    <li class="fragment">Влияние на дизайн и фичи языков программирования (Java, Kotlin, Typescript, Dart)</li>
-                  </ul>
+                  <h3>Проблемы</h3>
+                  <p class="fragment fade-in-then-semi-out">Формирование списка всех URL приложения нетривиально</p>
+                  <p class="fragment fade-in-then-semi-out">Параметры передаются через <span class="hljs-number">Map&lt;String, String&gt;</span></p>
+                  <p class="fragment fade-in-then-semi-out">UI требует доработок</p>
+                  <p class="fragment fade-in-then-semi-out">Только Compose UI</p>
+                  <p class="fragment fade-in-then-semi-out">Нет поддержки KMP</p>
+                  <p class="fragment fade-in-then-semi-out">Недооформлена как самостоятельная библиотека (WIP)</p>
                 </section>
                 <section>
                   <h3>Ссылки</h3>
-                  <ul>
-                    <li>Исходники презы:<br>
-                      <a href="https://github.com/dimsuz/adt-talk">https://github.com/dimsuz/adt-talk</a></li>
-                    <li>Статья <span class="hljs-title">by Joel Burget</span> про ADT (+ ряд тейлора, zippers, дифференцирование)<br>
-                      <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types</a>
-                    </li>
-                  </ul>
+                  <p><a href="https://git.appkode.ru/dev-department/pathfinder-kotlin">https://git.appkode.ru/dev-department/pathfinder-kotlin</a></p>
+                  <p>⚠️ Ветка <span class="hljs-number">copy-from-upstream</span> ⚠️</p>
+                  <p><br>А также</p>
+                  <ul><li>Дом.рф</li><li>VTB-AZ</li></ul>
+                    <p>Исходники презы:<br>
+                      <a href="https://github.com/dimsuz/adt-talk">https://github.com/dimsuz/pathfinder-talk</a></p>
                 </section>
             </div>
         </div>
